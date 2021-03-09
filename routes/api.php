@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,3 +30,9 @@ Route::group([
 
 });
 
+Route::group([
+	'middleware' => 'api',
+	'prefix' => 'v1'
+], function ($router){
+	Route::post('broadcast', [BrController::class, 'broadcast']);
+});

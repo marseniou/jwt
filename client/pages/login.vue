@@ -64,7 +64,13 @@ export default {
       }
     },
     async login() {
-      let d = await this.$axios.$post('/auth/login', { email: this.email, password: this.password }).catch(e => {
+      await this.$auth.loginWith('local', {
+          data: {
+            email: this.email,
+            password: this.password
+          }
+        })
+      /*let d = await this.$axios.$post('/auth/login', { email: this.email, password: this.password }).catch(e => {
         this.Errors = e.response.data.errors;
       });
       if (d) {
@@ -75,7 +81,7 @@ export default {
             password: this.password
           }
         })
-      }
+      }*/
     }
   },
 

@@ -27,15 +27,35 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [],
+  buildModules: [
+
+  ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
+
+
+    '@nuxtjs/auth-next',
+    '@nuxtjs/laravel-echo',
     '@nuxtjs/axios',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/toast'
   ],
 
+  echo: {
+    /* module options */
+    broadcaster: 'pusher',
+    plugins: ['@/plugins/echo.js'],
+    authModule: true,
+    /********* change that as well ***********/
+    authEndpoint: 'http://authandsockets.test/api/v1/broadcasting/auth',
+    connectOnLogin: true,
+    key: 'aSiAo5KaLau6uX07OF5UptkHHQyBkD8R',
+    wsHost: '127.0.0.1',
+    wsPort: 6001,
+    disableStats: true,
+    forceTLS: false,
+  },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: 'http://authandsockets.test/api'
@@ -55,7 +75,7 @@ export default {
         },
         user: {
           property: 'user',
-          autoFetch: true
+          //autoFetch: true
         },
         endpoints: {
           login: { url: '/auth/login', method: 'post' },
@@ -64,6 +84,10 @@ export default {
         }
       }
     }
+  },
+  toast: {
+    position: 'bottom-right',
+    duration: 3000
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {}
